@@ -21,11 +21,11 @@ namespace macros_internal
 {
     template<typename T, size_t N>
     char (&ArraySizeHelper(T (&array)[N]))[N];
-
-    template<typename To, typename From>
-    inline To implicit_cast(From const &f) {
-        return f;
-    }
-
 }
+
+template<typename To, typename From>
+inline To implicit_cast(From const &f) {
+    return f;
+}
+
 }
