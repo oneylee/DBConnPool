@@ -11,17 +11,20 @@ class Singleton
 public:
     
     static T* GetInstance() {
-        std::once_flag flag;
-        std::call_once(flag, [&] () { _singleton.reset(new T()); });
+        // static std::once_flag flag;
+        // std::call_once(flag, [&]() { _singleton.reset(new T()); });
+        _singleton.reset(new T());
         return _singleton.get();
     }
-private:
+protected:
     Singleton() {}
     ~Singleton() {}
-    DISALLOW_COPY_AND_ASSIGN(Singleton);
     static std::shared_ptr<T> _singleton;
+private:
+    DISALLOW_COPY_AND_ASSIGN(Singleton);
+    
 };
 
 template<typename T>
-T* Singleton<T>::_singleton = nullptr;
+std::shared_ptr<T> Singleton<T>::_singleton;
 }
