@@ -8,10 +8,16 @@ class Logging
 {
 public:
     enum LEVEL {FATAL, ERROR, WARN, INFO, DEBUG};
-    Logging() { _level = DEBUG; }
+    enum TYPE {CONSOLE, FILE, ALL};
+
+    Logging() : _level(DEBUG), _type(FILE) {}
     ~Logging() {}
+
     bool Logv(LEVEL level, const char* filename, int line, const char* func, const char* fmt...);
     LEVEL GetLevel() const { return _level; }
+    bool SetLevel(LEVEL level) { _level = level; return true; }
+    bool SetType(TYPE type) { _type = type; return true; }
+    bool SetFilename(const std::string& filename);
 
 private:
     DISALLOW_COPY_AND_ASSIGN(Logging);
@@ -19,6 +25,9 @@ private:
     std::string _filename;
     LEVEL _level;
     int _fd;
+    static uint64_t _pid;
+    static std::string _process_name;
+    TYPE _type;
 };
 }
 

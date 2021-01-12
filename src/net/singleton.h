@@ -11,9 +11,9 @@ class Singleton
 public:
     
     static T* GetInstance() {
-        // static std::once_flag flag;
-        // std::call_once(flag, [&]() { _singleton.reset(new T()); });
-        _singleton.reset(new T());
+        static std::once_flag flag;
+        std::call_once(flag, [&]() { _singleton.reset(new T()); });
+        // _singleton.reset(new T());
         return _singleton.get();
     }
 protected:

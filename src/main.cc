@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <limits>
 #include "slice.h"
 
 struct Node
@@ -34,5 +35,6 @@ int main()
     auto rr = ss.Split('c');
     std::for_each(rr.begin(), rr.end(), [] (const std::string& str) { std::cout << str << std::endl; });
     std::cout << "h" << std::endl;
+    std::cout << std::numeric_limits<unsigned int>::max() << std::endl;
     return 0;
 }
