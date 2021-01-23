@@ -18,7 +18,7 @@ public:
         _mask = _size - 1;
 
         _queue = (T**)new char[sizeof(T*) * _size];
-        if (_queue = nullptr) return false;
+        if (_queue == nullptr) return false;
 
         memset(_queue, 0, sizeof(T*) * _size);
         _readpos = 0;
